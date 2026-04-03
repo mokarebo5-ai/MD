@@ -1,130 +1,168 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>MD Elite Quiz | Play & Win</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=Cairo:wght@700&display=swap" rel="stylesheet">
     <style>
-        :root { --neon: #bc13fe; --bg: #020205; --card: rgba(15, 15, 30, 0.9); }
+        :root {
+            --bg: #050505;
+            --card: #121212;
+            --primary: #bc13fe; /* Neon Purple */
+            --secondary: #240046;
+            --accent: #00f2ff;
+            --text: #ffffff;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Orbitron', 'Cairo', sans-serif; }
         
         body { 
-            background: var(--bg) !important; color: white; font-family: 'Segoe UI', sans-serif; 
-            margin: 0; display: flex; justify-content: center; min-height: 100vh; overflow-x: hidden;
+            background: var(--bg); 
+            background-image: radial-gradient(circle at 50% 50%, #1a0033 0%, #050505 100%);
+            color: var(--text); 
+            min-height: 100vh;
         }
 
-        /* تأثير خطوط الشاشة (CRT Effect) */
-        body::before {
-            content: " "; position: fixed; top: 0; left: 0; bottom: 0; right: 0;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
-                        linear-gradient(90deg, rgba(255, 0, 0, 0.05), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.05));
-            background-size: 100% 2px, 3px 100%; z-index: 100; pointer-events: none;
+        .container { width: 95%; max-width: 800px; margin: 0 auto; padding: 20px; text-align: center; }
+
+        /* مكان الإعلان العلوي */
+        .ad-top { 
+            width: 100%; min-height: 50px; background: rgba(255,255,255,0.05); 
+            margin-bottom: 20px; border: 1px dashed #444; display: flex; align-items: center; justify-content: center;
+            font-size: 10px; color: #666;
         }
 
-        .main-frame { width: 100%; max-width: 420px; padding: 20px; box-sizing: border-box; z-index: 10; }
+        h1 { font-size: 2.5rem; color: var(--primary); text-shadow: 0 0 15px var(--primary); margin-bottom: 10px; }
 
-        /* مساحة إعلانات جوجل القادمة */
-        .google-ad-placeholder { 
-            border: 1px dashed var(--neon); background: rgba(188, 19, 254, 0.05);
-            min-height: 60px; border-radius: 8px; margin-bottom: 25px;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 9px; color: var(--neon); text-transform: uppercase;
+        .screen { display: none; animation: slideIn 0.4s ease-out; }
+        .active { display: block; }
+        @keyframes slideIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        .btn {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white; border: none; padding: 15px 30px; border-radius: 50px;
+            font-weight: 900; cursor: pointer; transition: 0.3s; margin: 10px;
+            box-shadow: 0 5px 15px rgba(188, 19, 254, 0.4);
+            width: 80%; max-width: 300px;
         }
+        .btn:hover { transform: scale(1.05); box-shadow: 0 0 25px var(--primary); }
 
-        .md-logo { 
-            font-size: 75px; font-weight: 900; text-align: center; margin: 20px 0;
-            text-shadow: 0 0 15px var(--neon), 0 0 30px var(--neon);
+        .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 20px; }
+        .q-btn {
+            background: var(--card); border: 2px solid var(--primary); color: white;
+            padding: 20px; border-radius: 15px; font-size: 1.2rem; cursor: pointer;
         }
+        .q-btn:disabled { opacity: 0.2; }
 
-        .nav { display: flex; gap: 8px; margin-bottom: 25px; background: #0a0a15; padding: 5px; border-radius: 12px; }
-        .nav-item { 
-            flex: 1; text-align: center; padding: 12px; font-size: 11px; font-weight: bold; 
-            color: #666; cursor: pointer; transition: 0.3s; border-radius: 8px;
+        .score-box {
+            display: flex; justify-content: space-around; margin-bottom: 20px;
+            background: rgba(255,255,255,0.05); padding: 15px; border-radius: 20px;
         }
-        .nav-item.active { color: white; background: var(--neon); box-shadow: 0 0 20px rgba(188, 19, 254, 0.4); }
+        .points { font-size: 1.5rem; color: var(--accent); }
 
-        .page { display: none; animation: fadeIn 0.4s ease-out; }
-        .page.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        .card { 
-            background: var(--card); border: 1px solid #1a1a2e; padding: 18px; border-radius: 15px; 
-            margin-bottom: 12px; display: flex; align-items: center; gap: 15px; transition: 0.2s;
+        /* Overlay for Questions */
+        .overlay {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.9);
+            display: none; align-items: center; justify-content: center; z-index: 1000;
         }
-        .card:hover { border-color: var(--neon); transform: scale(1.02); }
-        .card i { color: var(--neon); font-size: 20px; }
-
-        .disc-btn {
-            display: flex; flex-direction: column; align-items: center; background: #5865F2; 
-            color: white; text-decoration: none; padding: 30px; border-radius: 20px; 
-            font-weight: bold; transition: 0.3s; margin-top: 10px; border: 2px solid rgba(255,255,255,0.1);
+        .modal {
+            background: var(--card); border: 3px solid var(--primary); padding: 30px;
+            border-radius: 30px; width: 90%; max-width: 500px;
         }
-        .disc-btn:hover { box-shadow: 0 0 30px rgba(88, 101, 242, 0.6); transform: translateY(-3px); }
-
-        /* نص سياسة الخصوصية */
-        .policy-text { font-size: 12px; color: #888; line-height: 1.6; text-align: left; }
     </style>
 </head>
-<body onclick="initAudio()">
+<body>
 
-<audio id="tabSound" src="https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3"></audio>
+<div class="container">
+    <div class="ad-top" id="ad-top-slot">AD SPACE - PLACE BANNER HERE</div>
 
-<div class="main-frame">
-    <div class="google-ad-placeholder">Ad Space: Pending Google Approval</div>
-
-    <div class="md-logo">MD</div>
-
-    <div class="nav">
-        <div class="nav-item active" onclick="tab(event, 'about')">ABOUT</div>
-        <div class="nav-item" onclick="tab(event, 'links')">COMMUNITY</div>
-        <div class="nav-item" onclick="tab(event, 'policy')">PRIVACY</div>
+    <div id="home" class="screen active">
+        <h1>MD ELITE QUIZ</h1>
+        <p style="opacity: 0.7; margin-bottom: 30px;">Challenge your mind, dominate the leaderboard.</p>
+        <button class="btn" onclick="startMode('en')">START GAME (ENG)</button>
+        <button class="btn" style="background: #333;" onclick="startMode('ar')">ابدأ اللعبة (عربي)</button>
     </div>
 
-    <div id="about" class="page active">
-        <div class="card"><i class="fas fa-cube"></i><span>Roblox Developer</span></div>
-        <div class="card"><i class="fas fa-code"></i><span>Web Developer</span></div>
-        <div class="card"><i class="fab fa-discord"></i><span>Discord Developer</span></div>
-        <div class="card"><i class="fas fa-robot"></i><span>Bots Creator</span></div>
+    <div id="game" class="screen">
+        <div class="score-box">
+            <div>TEAM A: <span id="s1" class="points">0</span></div>
+            <div>TEAM B: <span id="s2" class="points">0</span></div>
+        </div>
+        <div id="board" class="grid"></div>
     </div>
 
-    <div id="links" class="page">
-        <a href="https://discord.gg/SQKqQfJUQ" class="disc-btn">
-            <i class="fab fa-discord fa-3x"></i>
-            <span style="margin-top:10px">JOIN SERVER</span>
-        </a>
+    <div id="win" class="screen">
+        <h2 id="winner-msg">VICTORY!</h2>
+        <button class="btn" onclick="location.reload()">PLAY AGAIN</button>
     </div>
+</div>
 
-    <div id="policy" class="page">
-        <div class="card" style="display:block;">
-            <h3 style="color:var(--neon); margin-top:0;">Privacy Policy</h3>
-            <div class="policy-text">
-                This site does not collect personal data. Cookies may be used by Google for ad personalization. By using this site, you agree to our terms.
-            </div>
+<div id="q-overlay" class="overlay">
+    <div class="modal">
+        <h2 id="q-text">Question Loading...</h2>
+        <div style="margin-top: 20px;">
+            <button class="btn" style="width:45%; font-size: 0.8rem;" onclick="addScore(1)">TEAM A CORRECT</button>
+            <button class="btn" style="width:45%; font-size: 0.8rem;" onclick="addScore(2)">TEAM B CORRECT</button>
+            <button class="btn" style="background: #444; width:90%;" onclick="closeQ()">CLOSE</button>
         </div>
     </div>
 </div>
 
 <script>
-    let audioReady = false;
-    const tabSnd = document.getElementById('tabSound');
+    let currentScore1 = 0;
+    let currentScore2 = 0;
+    let currentVal = 0;
 
-    function initAudio() {
-        if (!audioReady) {
-            tabSnd.play().then(() => { tabSnd.pause(); tabSnd.currentTime = 0; audioReady = true; });
-        }
+    const data = [100, 200, 300, 400, 500, 600, 700, 800, 900];
+    const questions = {
+        en: ["Capital of France?", "Fastest animal?", "H2O is...?", "First man on moon?", "Owner of X (Twitter)?", "Programming language for web?", "Largest Ocean?", "Red Planet?", "Creator of Roblox?"],
+        ar: ["عاصمة فرنسا؟", "أسرع حيوان؟", "رمز الماء؟", "أول رجل على القمر؟", "مالك منصة إكس؟", "لغة برمجة المتصفح؟", "أكبر محيط؟", "الكوكب الأحمر؟", "مؤسس روبلوكس؟"]
+    };
+    let activeLang = 'en';
+
+    function startMode(lang) {
+        activeLang = lang;
+        document.getElementById('home').classList.remove('active');
+        document.getElementById('game').classList.add('active');
+        renderBoard();
     }
 
-    function tab(e, id) {
-        if (audioReady) { tabSnd.currentTime = 0; tabSnd.play(); }
-        let items = document.getElementsByClassName("nav-item");
-        for (let x of items) x.classList.remove("active");
-        e.currentTarget.classList.add("active");
-        let pages = document.getElementsByClassName("page");
-        for (let p of pages) p.classList.remove("active");
-        document.getElementById(id).classList.add("active");
+    function renderBoard() {
+        const board = document.getElementById('board');
+        data.forEach((val, index) => {
+            let b = document.createElement('button');
+            b.className = 'q-btn';
+            b.innerText = val;
+            b.onclick = () => showQuestion(index, val, b);
+            board.appendChild(b);
+        });
+    }
+
+    function showQuestion(idx, val, btn) {
+        currentVal = val;
+        document.getElementById('q-text').innerText = questions[activeLang][idx];
+        document.getElementById('q-overlay').style.display = 'flex';
+        btn.disabled = true;
+    }
+
+    function addScore(team) {
+        if(team === 1) currentScore1 += currentVal;
+        else currentScore2 += currentVal;
+        updateUI();
+        closeQ();
+    }
+
+    function updateUI() {
+        document.getElementById('s1').innerText = currentScore1;
+        document.getElementById('s2').innerText = currentScore2;
+    }
+
+    function closeQ() {
+        document.getElementById('q-overlay').style.display = 'none';
     }
 </script>
 <script src="https://pl29046619.profitablecpmratenetwork.com/c7/eb/05/c7eb05600ce216eb92606000ba2c2953.js"></script>
 
 </body>
 </html>
-
