@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --neon: #bc13fe; --bg: #020205; --card: rgba(15, 15, 30, 0.9); }
+        
+        body { 
+            background: var(--bg) !important; color: white; font-family: 'Segoe UI', sans-serif; 
+            margin: 0; display: flex; justify-content: center; min-height: 100vh; overflow-x: hidden;
+        }
+
+        /* تأثير خطوط الشاشة (CRT Effect) */
+        body::before {
+            content: " "; position: fixed; top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.05), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.05));
+            background-size: 100% 2px, 3px 100%; z-index: 100; pointer-events: none;
+        }
+
+        .main-frame { width: 100%; max-width: 420px; padding: 20px; box-sizing: border-box; z-index: 10; }
+
+        /* مساحة إعلانات جوجل القادمة */
+        .google-ad-placeholder { 
+            border: 1px dashed var(--neon); background: rgba(188, 19, 254, 0.05);
+            min-height: 60px; border-radius: 8px; margin-bottom: 25px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 9px; color: var(--neon); text-transform: uppercase;
+        }
+
+        .md-logo { 
+            font-size: 75px; font-weight: 900; text-align: center; margin: 20px 0;
+            text-shadow: 0 0 15px var(--neon), 0 0 30px var(--neon);
+        }
+
+        .nav { display: flex; gap: 8px; margin-bottom: 25px; background: #0a0a15; padding: 5px; border-radius: 12px; }
+        .nav-item { 
+            flex: 1; text-align: center; padding: 12px; font-size: 11px; font-weight: bold; 
+            color: #666; cursor: pointer; transition: 0.3s; border-radius: 8px;
+        }
+        .nav-item.active { color: white; background: var(--neon); box-shadow: 0 0 20px rgba(188, 19, 254, 0.4); }
+
+        .page { display: none; animation: fadeIn 0.4s ease-out; }
+        .page.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .card { 
+            background: var(--card); border: 1px solid #1a1a2e; padding: 18px; border-radius: 15px; 
+            margin-bottom: 12px; display: flex; align-items: center; gap: 15px; transition: 0.2s;
+        }
+        .card:hover { border-color: var(--neon); transform: scale(1.02); }
+        .card i { color: var(--neon); font-size: 20px; }
+
+        .disc-btn {
+            display: flex; flex-direction: column; align-items: center; background: #5865F2; 
+            color: white; text-decoration: none; padding: 30px; border-radius: 20px; 
+            font-weight: bold; transition: 0.3s; margin-top: 10px; border: 2px solid rgba(255,255,255,0.1);
+        }
+        .disc-btn:hover { box-shadow: 0 0 30px rgba(88, 101, 242, 0.6); transform: translateY(-3px); }
+
+        /* نص سياسة الخصوصية */
+        .policy-text { font-size: 12px; color: #888; line-height: 1.6; text-align: left; }
+    </style>
+</head>
+<body onclick="initAudio()">
+
+<audio id="tabSound" src="https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3"></audio>
+
+<div class="main-frame">
+    <div class="google-ad-placeholder">Ad Space: Pending Google Approval</div>
+
+    <div class="md-logo">MD</div>
+
+    <div class="nav">
+        <div class="nav-item active" onclick="tab(event, 'about')">ABOUT</div>
+        <div class="nav-item" onclick="tab(event, 'links')">COMMUNITY</div>
+        <div class="nav-item" onclick="tab(event, 'policy')">PRIVACY</div>
+    </div>
+
+    <div id="about" class="page active">
+        <div class="card"><i class="fas fa-cube"></i><span>Roblox Developer</span></div>
+        <div class="card"><i class="fas fa-code"></i><span>Web Developer</span></div>
+        <div class="card"><i class="fab fa-discord"></i><span>Discord Developer</span></div>
+        <div class="card"><i class="fas fa-robot"></i><span>Bots Creator</span></div>
+    </div>
+
+    <div id="links" class="page">
+        <a href="https://discord.gg/SQKqQfJUQ" class="disc-btn">
+            <i class="fab fa-discord fa-3x"></i>
+            <span style="margin-top:10px">JOIN SERVER</span>
+        </a>
+    </div>
+
+    <div id="policy" class="page">
+        <div class="card" style="display:block;">
+            <h3 style="color:var(--neon); margin-top:0;">Privacy Policy</h3>
+            <div class="policy-text">
+                This site does not collect personal data. Cookies may be used by Google for ad personalization. By using this site, you agree to our terms.
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let audioReady = false;
+    const tabSnd = document.getElementById('tabSound');
+
+    function initAudio() {
+        if (!audioReady) {
+            tabSnd.play().then(() => { tabSnd.pause(); tabSnd.currentTime = 0; audioReady = true; });
+        }
+    }
+
+    function tab(e, id) {
+        if (audioReady) { tabSnd.currentTime = 0; tabSnd.play(); }
+        let items = document.getElementsByClassName("nav-item");
+        for (let x of items) x.classList.remove("active");
+        e.currentTarget.classList.add("active");
+        let pages = document.getElementsByClassName("page");
+        for (let p of pages) p.classList.remove("active");
+        document.getElementById(id).classList.add("active");
+    }
+</script>
+
+</body>
+</html>
+
