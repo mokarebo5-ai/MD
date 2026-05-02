@@ -1,103 +1,56 @@
-
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Respect Town RP | الدولة</title>
+    <title>Respect Town RP | نظام الدولة</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700;900&display=swap" rel="stylesheet">
     <style>
         :root { --primary: #ff0000; --bg: #000; --card: #0c0c0c; --text-white: #e0e0e0; }
-        
-        * { 
-            margin: 0; padding: 0; box-sizing: border-box; font-family: 'Cairo', sans-serif; 
-            -webkit-tap-highlight-color: transparent; outline: none;
-            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Cairo', sans-serif; -webkit-tap-highlight-color: transparent; outline: none; }
         
         body { 
-            background-color: var(--bg); color: #fff; min-height: 100vh; 
-            overflow-x: hidden; user-select: none;
-            background-image: radial-gradient(circle at top, #200000 0%, #000 100%);
+            background-color: var(--bg); color: #fff; min-height: 100vh; overflow-x: hidden; user-select: none;
+            background-image: radial-gradient(circle at top, #250000 0%, #000 100%);
         }
 
         header { 
-            padding: 35px 15px; text-align: center; background: rgba(0,0,0,0.85); 
-            border-bottom: 2px solid var(--primary); position: sticky; top: 0; z-index: 100;
-            backdrop-filter: blur(12px);
+            padding: 30px 15px; text-align: center; background: rgba(0,0,0,0.85); 
+            border-bottom: 2px solid var(--primary); position: sticky; top: 0; z-index: 100; backdrop-filter: blur(12px);
         }
 
-        /* تحسين حركة الشعار - فخامة عالية */
-        .logo-container { 
-            display: flex; flex-direction: column; align-items: center; 
-            animation: floatingLogo 4s infinite ease-in-out;
-        }
-        .res-text { 
-            color: var(--text-white); font-size: 32px; font-weight: 900; 
-            line-height: 0.8; letter-spacing: 3px;
-            text-shadow: 0 0 15px rgba(255,255,255,0.1);
-        }
-        .town-text { 
-            color: var(--primary); font-size: 24px; font-weight: 900; 
-            line-height: 1.2; letter-spacing: 8px; 
-            text-shadow: 0 0 20px var(--primary);
-            animation: redGlow 2s infinite ease-in-out;
-        }
+        .logo-container { display: flex; flex-direction: column; align-items: center; animation: floatingLogo 4s infinite ease-in-out; }
+        .res-text { color: var(--text-white); font-size: 32px; font-weight: 900; line-height: 0.8; letter-spacing: 3px; }
+        .town-text { color: var(--primary); font-size: 24px; font-weight: 900; line-height: 1.2; letter-spacing: 8px; text-shadow: 0 0 20px var(--primary); }
 
-        @keyframes floatingLogo {
-            0%, 100% { transform: translateY(0) scale(1); }
-            50% { transform: translateY(-8px) scale(1.03); }
+        @keyframes floatingLogo { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+
+        .tabs { display: flex; justify-content: center; gap: 10px; margin-top: 20px; }
+        .tab-btn { background: #111; border: 1px solid #222; color: #777; padding: 9px 18px; border-radius: 8px; font-size: 11px; font-weight: bold; transition: 0.3s; }
+        .tab-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); box-shadow: 0 0 20px rgba(255, 0, 0, 0.4); }
+
+        .content { padding: 20px; max-width: 500px; margin: auto; }
+        .page { display: none; animation: fadeIn 0.4s ease; }
+        .page.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .section-box { background: var(--card); border: 1px solid #1a1a1a; padding: 20px; border-radius: 18px; margin-bottom: 20px; }
+        h2 { font-size: 18px; margin-bottom: 15px; border-right: 4px solid var(--primary); padding-right: 12px; color: var(--primary); }
+
+        .rule-card { background: #111; padding: 14px; border-radius: 10px; margin-bottom: 10px; font-size: 12.5px; border: 1px solid #1d1d1d; transition: 0.2s; }
+        .rule-card:active { transform: scale(0.97); border-color: var(--primary); background: #1a0000; }
+
+        label { display: block; margin-bottom: 8px; font-size: 12px; color: #888; margin-right: 5px; }
+        input, textarea, select { 
+            width: 100%; padding: 14px; background: #050505; border: 1px solid #222; 
+            border-radius: 10px; color: #fff; font-size: 14px; margin-bottom: 15px; transition: 0.3s;
         }
+        input:focus, textarea:focus { border-color: var(--primary); box-shadow: 0 0 10px rgba(255,0,0,0.2); }
 
-        @keyframes redGlow {
-            0%, 100% { opacity: 1; filter: drop-shadow(0 0 5px var(--primary)); }
-            50% { opacity: 0.7; filter: drop-shadow(0 0 15px var(--primary)); }
-        }
-
-        .tabs { display: flex; justify-content: center; gap: 12px; margin-top: 25px; }
-        .tab-btn { 
-            background: #111; border: 1px solid #222; color: #777; 
-            padding: 9px 20px; border-radius: 8px; font-size: 12px; font-weight: bold; 
-        }
-        .tab-btn.active { 
-            background: var(--primary); color: #fff; border-color: var(--primary);
-            box-shadow: 0 0 20px rgba(255, 0, 0, 0.4); transform: scale(1.05);
-        }
-
-        .content { padding: 20px; max-width: 450px; margin: auto; }
-        .page { display: none; }
-        .page.active { display: block; animation: slideFade 0.5s ease-out; }
-
-        @keyframes slideFade { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
-
-        .section-box { background: var(--card); border: 1px solid #1a1a1a; padding: 22px; border-radius: 18px; margin-bottom: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        h2 { font-size: 18px; margin-bottom: 18px; border-right: 5px solid var(--primary); padding-right: 12px; color: var(--primary); letter-spacing: 1px; }
-
-        /* هوفر مطور للقوانين */
-        .rule-card { 
-            background: #111; padding: 15px; border-radius: 12px; 
-            margin-bottom: 12px; font-size: 13px; border: 1px solid #1d1d1d;
-            line-height: 1.5; cursor: pointer;
-        }
-        .rule-card:active { 
-            background: linear-gradient(90deg, #1a0000, #000); 
-            border-color: var(--primary); transform: scale(0.96); 
-            box-shadow: inset 0 0 10px rgba(255,0,0,0.1);
-        }
-
-        /* حقول الإدخال */
-        input, textarea { 
-            width: 100%; padding: 15px; background: #050505; 
-            border: 1px solid #222; border-radius: 12px; color: #fff; 
-            font-size: 14px; margin-bottom: 15px;
-        }
-        input:focus { border-color: var(--primary); background: #000; box-shadow: 0 0 10px rgba(255,0,0,0.1); }
-
-        /* زر الإرسال الضخم */
         .submit-btn { 
-            width: 100%; padding: 18px; background: var(--primary); 
-            border: none; color: #fff; font-weight: 900; font-size: 17px; 
-            border-radius: 12px; box-shadow: 0 6px 0 #800000;
+            width: 100%; padding: 18px; background: var(--primary); border: none; color: #fff; 
+            font-weight: 900; font-size: 17px; border-radius: 12px; cursor: pointer;
+            box-shadow: 0 6px 0 #800000; transition: 0.2s;
         }
         .submit-btn:active { transform: translateY(4px); box-shadow: 0 2px 0 #800000; }
 
@@ -113,7 +66,7 @@
         </div>
         <div class="tabs">
             <button class="tab-btn active" onclick="openPage('home', this)">الرئيسية</button>
-            <button class="tab-btn" onclick="openPage('rules', this)">القوانين</button>
+            <button class="tab-btn" onclick="openPage('rules', this)">الدستور</button>
             <button class="tab-btn" onclick="openPage('apply', this)">التفعيل</button>
         </div>
     </header>
@@ -121,32 +74,39 @@
     <div class="content">
         <div id="home" class="page active">
             <div class="section-box">
-                <h2>مرحباً بك في الدولة 🏛️</h2>
-                <p style="color: #aaa; line-height: 1.8;">أنت الآن في عاصمة الرول بلاي. نعتز بوجودك كجزء من مجتمعنا، نأمل منك الالتزام التام بكافة بنود الدستور لضمان استمرارية هيبة الدولة.</p>
+                <h2>أهلاً بك في الدولة 🏛️</h2>
+                <p style="color: #aaa; font-size: 13px; line-height: 1.8;">نظام التفعيل الآلي لدولة Respect Town. يرجى الإجابة على الأسئلة بصدق وواقعية لضمان قبولك في المجتمع.</p>
             </div>
         </div>
 
         <div id="rules" class="page">
             <div class="section-box">
                 <h2>دستور الدولة ⚖️</h2>
-                <div class="rule-card">الاحترام واجب بين جميع اللاعبين، أي سب أو إهانة تعرضك للعقوبة.</div>
-                <div class="rule-card">يمنع القتل العشوائي (RDM) بدون سبب مقنع.</div>
-                <div class="rule-card">يمنع الاعتداء أو التخريب (VDM) بالسيارات.</div>
-                <div class="rule-card">الالتزام بالرول بلاي الواقعي دائماً.</div>
-                <div class="rule-card">يمنع استغلال الثغرات أو الغش.</div>
-                <div class="rule-card">احترام قرارات الإدارة وعدم الجدال المسيء.</div>
-                <div class="rule-card">يمنع الـ Combat Logging لتجنب المواقف.</div>
-                <div class="rule-card">يمنع انتحال الشخصيات الرسمية في الدولة.</div>
+                <div class="rule-card">الاحترام المتبادل شرط أساسي للبقاء.</div>
+                <div class="rule-card">يمنع الـ RDM و الـ VDM منعاً باتاً.</div>
+                <div class="rule-card">الالتزام التام بتمثيل الشخصية (RP).</div>
+                <div class="rule-card">يمنع الخروج من الموقف (Combat Log).</div>
+                <div class="rule-card">  احترام المسئولين.</div>
             </div>
         </div>
 
         <div id="apply" class="page">
             <div class="section-box">
-                <h2>طلب الانضمام للدولة</h2>
+                <h2>طلب المواطنة</h2>
+                
+                <label>معلومات الحساب</label>
                 <input type="text" id="r_user" placeholder="يوزر روبلوكس">
                 <input type="text" id="d_user" placeholder="يوزر الديسكورد">
-                <textarea id="r_exp" rows="3" placeholder="لماذا تريد الانضمام إلى دولتنا؟"></textarea>
-                <button class="submit-btn" id="s_btn" onclick="submitData()">إرسال الطلب</button>
+                
+                <label>المعلومات الشخصية</label>
+                <input type="number" id="u_age" placeholder="العمر الحقيقي">
+                
+                <label>أسئلة الرول بلاي (RP)</label>
+                <textarea id="q_vdm" rows="2" placeholder="ما هو مفهوم الـ VDM بالنسبة لك؟"></textarea>
+                <textarea id="q_metagaming" rows="2" placeholder="اشرح معنى الـ MetaGaming؟"></textarea>
+                <textarea id="q_scenario" rows="3" placeholder="إذا تعرضت للسرقة في منطقة نائية، كيف تتصرف واقعياً؟"></textarea>
+                
+                <button class="submit-btn" id="s_btn" onclick="submitData()">إرسال الطلب للدولة</button>
                 <div id="response-msg"></div>
             </div>
         </div>
@@ -158,63 +118,58 @@
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
             document.getElementById(pageId).classList.add('active');
             btn.classList.add('active');
-            if (window.navigator.vibrate) window.navigator.vibrate(12);
+            window.scrollTo({top: 0, behavior: 'smooth'});
         }
 
         async function submitData() {
-            const webhookUrl = "https://discord.com/api/webhooks/1500146994642026516/ImqkpAcaBC92U8HJY1ayLYYtPRb98q_YpXpH-0q-XVC0Gyb2GNAlsWZsLrZus8_i7Mux";
-            const user = document.getElementById('r_user').value;
-            const discord = document.getElementById('d_user').value;
-            const exp = document.getElementById('r_exp').value;
-            const msg = document.getElementById('response-msg');
-            const btn = document.getElementById('s_btn');
+            const webhook = "https://discord.com/api/webhooks/1500146994642026516/ImqkpAcaBC92U8HJY1ayLYYtPRb98q_YpXpH-0q-XVC0Gyb2GNAlsWZsLrZus8_i7Mux";
+            const data = {
+                user: document.getElementById('r_user').value,
+                discord: document.getElementById('d_user').value,
+                age: document.getElementById('u_age').value,
+                vdm: document.getElementById('q_vdm').value,
+                meta: document.getElementById('q_metagaming').value,
+                scen: document.getElementById('q_scenario').value
+            };
 
-            if(!user || !discord || !exp) {
-                msg.style.color = "#ffcc00";
-                msg.innerText = "⚠️ يرجى إدخال كافة البيانات";
-                return;
+            const msg = document.getElementById('response-msg');
+            if(!data.user || !data.age || !data.vdm) {
+                msg.style.color = "yellow"; msg.innerText = "⚠️ أكمل جميع الأسئلة أولاً"; return;
             }
 
-            btn.disabled = true;
-            btn.innerText = "جاري إرسال طلبك...";
+            document.getElementById('s_btn').disabled = true;
+            document.getElementById('s_btn').innerText = "جاري إرسال ملفك...";
 
-            const payload = {
-                username: "نظام الدولة - Respect Town",
+            const embed = {
+                username: "بوابة المواطنة | Respect Town",
                 embeds: [{
-                    title: "📥 طلب انضمام جديد للدولة",
+                    title: "📄 طلب تفعيل جديد",
+                    description: "يجب مراجعة هذا الطلب من قبل **Activate Manager**",
                     color: 16711680,
                     fields: [
-                        { name: "👤 اسم اللاعب", value: user, inline: true },
-                        { name: "🆔 حساب الديسكورد", value: discord, inline: true },
-                        { name: "📜 الهدف من الانضمام", value: exp }
+                        { name: "👤 اللاعب", value: data.user, inline: true },
+                        { name: "🆔 ديسكورد", value: data.discord, inline: true },
+                        { name: "🎂 العمر", value: data.age, inline: true },
+                        { name: "🚗 مفهوم VDM", value: data.vdm },
+                        { name: "🧠 مفهوم MetaGaming", value: data.meta },
+                        { name: "🎬 تصرف واقعي", value: data.scen },
+                        { name: "🛠️ الإجراء المطلوب", value: "استخدم الأوامر لإعطاء رتبة `Activated` أو `Inactive`" }
                     ],
-                    footer: { text: "الجمهورية الرسمية لـ Respect Town" },
+                    footer: { text: "القرار بيد الإدارة العليا" },
                     timestamp: new Date()
                 }]
             };
 
             try {
-                const response = await fetch(webhookUrl, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
-
-                if (response.ok) {
-                    msg.style.color = "#00ff00";
-                    msg.innerText = "✅ تم إرسال طلبك بنجاح للمراجعة";
-                    btn.innerText = "تم الإرسال";
-                    document.getElementById('r_user').value = "";
-                    document.getElementById('d_user').value = "";
-                    document.getElementById('r_exp').value = "";
-                } else { throw new Error(); }
-            } catch (error) {
-                msg.style.color = "red";
-                msg.innerText = "❌ حدث خطأ، يرجى المحاولة لاحقاً";
-                btn.disabled = false;
-                btn.innerText = "إعادة الإرسال";
+                await fetch(webhook, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(embed) });
+                msg.style.color = "#00ff00"; msg.innerText = "✅ تم الإرسال! انتظر قرار الإدارة.";
+                document.getElementById('s_btn').innerText = "تم الإرسال بنجاح";
+            } catch {
+                msg.style.color = "red"; msg.innerText = "❌ فشل الإرسال";
+                document.getElementById('s_btn').disabled = false;
             }
         }
     </script>
 </body>
 </html>
+                
