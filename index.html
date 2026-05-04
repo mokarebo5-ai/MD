@@ -3,172 +3,179 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Real Life | التفعيل الرسمي</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700;900&display=swap" rel="stylesheet">
+    <title>Real Life | الرابطة الرسمية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;900&display=swap" rel="stylesheet">
     <style>
-        :root { --primary: #ff0000; --bg: #000; --card: #0d0d0d; --text-white: #f0f0f0; }
+        :root { --accent: #ff8000; --bg: #050505; --panel: rgba(20, 20, 20, 0.8); --border: rgba(255, 128, 0, 0.2); }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Cairo', sans-serif; -webkit-tap-highlight-color: transparent; outline: none; }
         
         body { 
-            background-color: var(--bg); color: #fff; min-height: 100vh; overflow-x: hidden; user-select: none;
-            background-image: radial-gradient(circle at top, #2a0000 0%, #000 100%);
+            background-color: var(--bg); color: #e0e0e0; min-height: 100vh; overflow-x: hidden; 
+            background-image: radial-gradient(circle at 50% -20%, #2a1a00 0%, #050505 80%);
         }
 
         header { 
-            padding: 30px 15px; text-align: center; background: rgba(0,0,0,0.9); 
-            border-bottom: 2px solid var(--primary); position: sticky; top: 0; z-index: 100; backdrop-filter: blur(15px);
+            padding: 40px 20px; text-align: center; border-bottom: 1px solid var(--border); 
+            backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100;
         }
 
-        .logo-container { display: flex; flex-direction: column; align-items: center; animation: logoMove 4s infinite ease-in-out; }
-        .res-text { color: var(--text-white); font-size: 34px; font-weight: 900; line-height: 0.8; letter-spacing: 2px; }
-        .town-text { color: var(--primary); font-size: 26px; font-weight: 900; line-height: 1.2; letter-spacing: 10px; text-shadow: 0 0 25px var(--primary); }
+        .logo-wrap { animation: float 5s infinite ease-in-out; cursor: default; }
+        .main-title { font-size: 38px; font-weight: 900; letter-spacing: 5px; color: #fff; line-height: 1; }
+        .sub-title { font-size: 20px; font-weight: 600; color: var(--accent); letter-spacing: 12px; margin-top: 5px; text-transform: uppercase; }
 
-        @keyframes logoMove { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+        @keyframes float { 0%, 100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-10px) scale(1.02); } }
 
-        .tabs { display: flex; justify-content: center; gap: 10px; margin-top: 20px; }
-        .tab-btn { background: #151515; border: 1px solid #222; color: #666; padding: 10px 22px; border-radius: 10px; font-size: 12px; font-weight: bold; transition: 0.3s; cursor: pointer; }
-        .tab-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); box-shadow: 0 0 25px rgba(255, 0, 0, 0.5); }
+        nav { display: flex; justify-content: center; gap: 15px; margin-top: 25px; }
+        .nav-link { 
+            background: transparent; border: 1px solid #333; color: #888; 
+            padding: 10px 25px; border-radius: 50px; font-size: 13px; font-weight: bold; transition: 0.4s;
+        }
+        .nav-link.active { background: var(--accent); color: #000; border-color: var(--accent); box-shadow: 0 0 20px rgba(255,128,0,0.3); }
 
-        .content { padding: 20px; max-width: 500px; margin: auto; }
-        .page { display: none; animation: slideUp 0.5s ease-out; }
-        .page.active { display: block; }
-        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .container { padding: 25px; max-width: 550px; margin: auto; }
+        .section { display: none; }
+        .section.active { display: block; animation: fadeInUp 0.6s cubic-bezier(0.2, 1, 0.3, 1); }
 
-        .section-box { background: var(--card); border: 1px solid #1f1f1f; padding: 25px; border-radius: 20px; margin-bottom: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.8); }
-        h2 { font-size: 18px; margin-bottom: 20px; border-right: 5px solid var(--primary); padding-right: 15px; color: var(--primary); }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
-        .rule-card { background: #111; padding: 15px; border-radius: 12px; margin-bottom: 12px; font-size: 13px; border-left: 2px solid transparent; transition: 0.3s; }
-        .rule-card:active { border-left-color: var(--primary); background: #1a0000; transform: translateX(-5px); }
+        .box { background: var(--panel); border: 1px solid #1a1a1a; padding: 30px; border-radius: 24px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+        h3 { font-size: 20px; margin-bottom: 25px; color: var(--accent); display: flex; align-items: center; gap: 10px; }
+        h3::after { content: ''; flex: 1; height: 1px; background: #222; }
 
-        label { display: block; margin-bottom: 10px; font-size: 13px; color: #aaa; margin-right: 5px; font-weight: bold; }
+        .rule { background: rgba(255,255,255,0.02); padding: 18px; border-radius: 15px; margin-bottom: 12px; font-size: 14px; border-right: 3px solid #333; transition: 0.3s; }
+        .rule:active { border-right-color: var(--accent); background: rgba(255,128,0,0.05); transform: scale(0.98); }
+
+        .field-group { margin-bottom: 20px; }
+        label { font-size: 13px; color: #666; margin-bottom: 8px; display: block; padding-right: 5px; }
         input, textarea { 
-            width: 100%; padding: 16px; background: #050505; border: 1px solid #252525; 
-            border-radius: 12px; color: #fff; font-size: 14px; margin-bottom: 18px; transition: 0.3s;
+            width: 100%; padding: 18px; background: #0a0a0a; border: 1px solid #151515; 
+            border-radius: 15px; color: #fff; font-size: 14px; transition: 0.3s;
         }
-        input:focus, textarea:focus { border-color: var(--primary); background: #000; box-shadow: 0 0 15px rgba(255,0,0,0.1); }
+        input:focus, textarea:focus { border-color: var(--accent); background: #000; }
 
-        .submit-btn { 
-            width: 100%; padding: 20px; background: var(--primary); border: none; color: #fff; 
-            font-weight: 900; font-size: 18px; border-radius: 15px; cursor: pointer;
-            box-shadow: 0 6px 0 #800000; transition: 0.2s;
+        .btn-send { 
+            width: 100%; padding: 20px; background: var(--accent); border: none; color: #000; 
+            font-weight: 900; font-size: 18px; border-radius: 18px; cursor: pointer; transition: 0.3s;
         }
-        .submit-btn:active { transform: translateY(4px); box-shadow: 0 2px 0 #800000; }
+        .btn-send:active { transform: scale(0.95); opacity: 0.8; }
 
-        #response-msg { text-align: center; margin-top: 20px; font-weight: bold; font-size: 14px; }
+        #status { text-align: center; margin-top: 20px; font-size: 14px; letter-spacing: 1px; }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="logo-container">
-            <div class="res-text">REAL</div>
-            <div class="town-text">LIFE</div>
+        <div class="logo-wrap">
+            <div class="main-title">REAL</div>
+            <div class="sub-title">LIFE</div>
         </div>
-        <div class="tabs">
-            <button class="tab-btn active" onclick="openPage('home', this)">الرئيسية</button>
-            <button class="tab-btn" onclick="openPage('rules', this)">الدستور</button>
-            <button class="tab-btn" onclick="openPage('apply', this)">التفعيل</button>
-        </div>
+        <nav>
+            <button class="nav-link active" onclick="showPage('home', this)">البوابة</button>
+            <button class="nav-link" onclick="showPage('laws', this)">القوانين</button>
+            <button class="nav-link" onclick="showPage('form', this)">التفعيل</button>
+        </nav>
     </header>
 
-    <div class="content">
-        <div id="home" class="page active">
-            <div class="section-box">
-                <h2>أهلاً بك في Real Life 🌆</h2>
-                <p style="color: #bbb; font-size: 13.5px; line-height: 1.8;">أنت على وشك الانضمام لأضخم مجتمع حياة واقعية. هنا، أفعالك تحدد مسارك. اقرأ الدستور جيداً قبل البدء برحلتك.</p>
+    <div class="container">
+        <div id="home" class="section active">
+            <div class="box">
+                <h3>عن المجتمع</h3>
+                <p style="line-height: 2; color: #999;">مرحباً بك في Real Life. نحن لا نقدم مجرد لعبة، بل تجربة حياة متكاملة. هنا يتم اختبار قدرتك على اتخاذ القرار، الصبر، وتمثيل الشخصية تحت أي ظرف.</p>
             </div>
         </div>
 
-        <div id="rules" class="page">
-            <div class="section-box">
-                <h2>دستور الدولة ⚖️</h2>
-                <div class="rule-card">الاحترام المتبادل هو حجر الأساس في التعامل.</div>
-                <div class="rule-card">يمنع التخريب المتعمد أو القتل بدون دافع واقعي.</div>
-                <div class="rule-card">تمثيل الشخصية إلزامي في كافة الظروف.</div>
-                <div class="rule-card">قرارات Activate Manager نهائية ومحترمة.</div>
-                <div class="rule-card">يمنع استغلال الثغرات البرمجية لأي سبب.</div>
+        <div id="laws" class="section">
+            <div class="box">
+                <h3>الدستور العام</h3>
+                <div class="rule">الاحترام المتبادل هو العملة الوحيدة المقبولة هنا.</div>
+                <div class="rule">يمنع التخريب العبثي أو القتل بدون دافع قصصي قوي.</div>
+                <div class="rule">تمثيل دور الشخصية (RP) إلزامي في كل لحظة.</div>
+                <div class="rule-card">يمنع استغلال أي ثغرة برمجية لتجاوز النظام.</div>
+                <div class="rule">الخروج من الموقف القائم يعرضك للمساءلة القانونية.</div>
             </div>
         </div>
 
-        <div id="apply" class="page">
-            <div class="section-box">
-                <h2>ملف الهوية الشخصية</h2>
+        <div id="form" class="section">
+            <div class="box">
+                <h3>اختبار الاستحقاق</h3>
                 
-                <label>البيانات الأساسية</label>
-                <input type="text" id="r_user" placeholder="اسمك في روبلوكس">
-                <input type="text" id="d_user" placeholder="حساب الديسكورد">
-                <input type="number" id="u_age" placeholder="عمرك الحقيقي">
-                
-                <label>اختبار المنطق والواقعية (أسئلة بشرية)</label>
-                <textarea id="q_1" rows="3" placeholder="لو صدمت شخصاً بالخطأ في وسط المدينة، ما هي أول ثلاث خطوات ستقوم بها؟"></textarea>
-                <textarea id="q_2" rows="3" placeholder="إذا رأيت شخصاً يرتكب مخالفة قانونية ولا يوجد شرطة، هل ستتدخل كبطل أم ستتجاهل؟ ولماذا؟"></textarea>
-                <textarea id="q_3" rows="4" placeholder="تخيل أنك أصبحت فقيراً جداً في السيرفر، كيف ستبدأ بجمع المال بطريقة قانونية وواقعية؟"></textarea>
-                
-                <button class="submit-btn" id="s_btn" onclick="submitData()">إرسال الطلب للإدارة</button>
-                <div id="response-msg"></div>
+                <div class="field-group">
+                    <label>معلومات الهوية</label>
+                    <input type="text" id="r_user" placeholder="يوزر روبلوكس">
+                    <input type="text" id="d_user" placeholder="يوزر الديسكورد" style="margin-top: 10px;">
+                    <input type="number" id="u_age" placeholder="العمر الحقيقي" style="margin-top: 10px;">
+                </div>
+
+                <div class="field-group">
+                    <label>اختبار المنطق والواقعية</label>
+                    <textarea id="q1" rows="3" placeholder="تخيل أنك تقود بسرعة عالية وصدمت سيارة شرطة خالية، ولا يوجد أحد يراقبك.. ماذا تفعل؟"></textarea>
+                    <textarea id="q2" rows="3" placeholder="إذا قام شخص بإهانتك وسط حشد من الناس، كيف ستأخذ حقك بدون كسر قوانين المدينة؟"></textarea>
+                    <textarea id="q3" rows="3" placeholder="ما هو الفرق الجوهري بين 'اللاعب' و 'الشخصية' في رأيك؟"></textarea>
+                    <textarea id="q4" rows="3" placeholder="إذا كنت في موقف 'حياة أو موت' وطلب منك عدوك الاستسلام مقابل العيش، كيف ستتصرف شخصيتك؟"></textarea>
+                    <textarea id="q5" rows="3" placeholder="لماذا تعتقد أنك تستحق مكاناً في Real Life بدلاً من مئات المتقدمين الآخرين؟"></textarea>
+                </div>
+
+                <button class="btn-send" id="submitBtn" onclick="process()">تقديم الطلب</button>
+                <div id="status"></div>
             </div>
         </div>
     </div>
 
     <script>
-        function openPage(pageId, btn) {
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-            document.getElementById(pageId).classList.add('active');
+        function showPage(id, btn) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.nav-link').forEach(n => n.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
             btn.classList.add('active');
             window.scrollTo({top: 0, behavior: 'smooth'});
-            if (window.navigator.vibrate) window.navigator.vibrate(15);
         }
 
-        async function submitData() {
-            const webhook = "https://discord.com/api/webhooks/1500969638266146916/2YGfQWJplswUJwoDKfeh5NyjG_O7uAicND581OmafskBln5yH4UGuPkC3PCXBgJl4GQw";
-            
+        async function process() {
+            const hook = "https://discord.com/api/webhooks/1500969638266146916/2YGfQWJplswUJwoDKfeh5NyjG_O7uAicND581OmafskBln5yH4UGuPkC3PCXBgJl4GQw";
             const fields = {
                 user: document.getElementById('r_user').value,
-                discord: document.getElementById('d_user').value,
+                disc: document.getElementById('d_user').value,
                 age: document.getElementById('u_age').value,
-                q1: document.getElementById('q_1').value,
-                q2: document.getElementById('q_2').value,
-                q3: document.getElementById('q_3').value
+                q1: document.getElementById('q1').value,
+                q2: document.getElementById('q2').value,
+                q3: document.getElementById('q3').value,
+                q4: document.getElementById('q4').value,
+                q5: document.getElementById('q5').value
             };
 
-            const msg = document.getElementById('response-msg');
-            if(!fields.user || !fields.age || !fields.q1 || !fields.q2 || !fields.q3) {
-                msg.style.color = "#ffaa00"; msg.innerText = "⚠️ نرجو منك الإجابة على كافة التساؤلات لتقييم طلبك"; return;
+            const status = document.getElementById('status');
+            if(!fields.user || !fields.q1 || !fields.q5) {
+                status.style.color = "var(--accent)"; status.innerText = "يرجى الإجابة على جميع الأسئلة بعناية."; return;
             }
 
-            const btn = document.getElementById('s_btn');
-            btn.disabled = true;
-            btn.innerText = "جاري رفع ملفك للدولة...";
+            const btn = document.getElementById('submitBtn');
+            btn.disabled = true; btn.innerText = "جاري المزامنة...";
 
             const payload = {
-                username: "بوابة Real Life",
+                username: "نظام التحقق - Real Life",
                 embeds: [{
-                    title: "📥 طلب انضمام جديد",
-                    description: "يجب مراجعته من قبل **Activate Manager** بعناية",
-                    color: 16711680,
+                    title: "📥 ملف تقديم جديد",
+                    color: 16744448,
                     fields: [
-                        { name: "👤 اسم المواطن", value: fields.user, inline: true },
-                        { name: "🆔 الديسكورد", value: fields.discord, inline: true },
+                        { name: "👤 العضو", value: fields.user + " (" + fields.disc + ")", inline: true },
                         { name: "🎂 العمر", value: fields.age, inline: true },
-                        { name: "🚗 التعامل مع الحوادث", value: fields.q1 },
-                        { name: "⚖️ الموقف الأخلاقي", value: fields.q2 },
-                        { name: "💰 خطة العمل", value: fields.q3 },
-                        { name: "🛠️ رتب التفعيل", value: "المسموح لهم: `Activate Manager`\nالرتب: `Activated` / `Inactive`" }
+                        { name: "📌 حادث الشرطة", value: fields.q1 },
+                        { name: "⚖️ رد الفعل العام", value: fields.q2 },
+                        { name: "🧠 فلسفة الـ RP", value: fields.q3 },
+                        { name: "🎭 موقف الاستسلام", value: fields.q4 },
+                        { name: "🌟 الاستحقاق", value: fields.q5 }
                     ],
-                    footer: { text: "نظام التفعيل التلقائي - Real Life" },
+                    footer: { text: "يجب مراجعة الردود لتقييم المنطق قبل التفعيل" },
                     timestamp: new Date()
                 }]
             };
 
             try {
-                const res = await fetch(webhook, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(payload) });
-                if(res.ok) {
-                    msg.style.color = "#00ff00"; msg.innerText = "✅ تم استلام طلبك، ستتم مراجعته قريباً.";
-                    btn.innerText = "تم الإرسال";
-                } else { throw new Error(); }
+                await fetch(hook, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(payload) });
+                status.style.color = "#00ff00"; status.innerText = "تم إرسال طلبك بنجاح. انتظر قرار اللجنة.";
+                btn.innerText = "تم الإرسال";
             } catch {
-                msg.style.color = "red"; msg.innerText = "❌ حدث خطأ في الشبكة، حاول مرة أخرى";
+                status.style.color = "red"; status.innerText = "حدث خطأ غير متوقع.";
                 btn.disabled = false; btn.innerText = "إعادة المحاولة";
             }
         }
