@@ -3,66 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Respect Town RP | نظام الدولة</title>
+    <title>Real Life | التفعيل الرسمي</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700;900&display=swap" rel="stylesheet">
     <style>
-        :root { --primary: #ff0000; --bg: #000; --card: #0c0c0c; --text-white: #e0e0e0; }
+        :root { --primary: #ff0000; --bg: #000; --card: #0d0d0d; --text-white: #f0f0f0; }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Cairo', sans-serif; -webkit-tap-highlight-color: transparent; outline: none; }
         
         body { 
             background-color: var(--bg); color: #fff; min-height: 100vh; overflow-x: hidden; user-select: none;
-            background-image: radial-gradient(circle at top, #250000 0%, #000 100%);
+            background-image: radial-gradient(circle at top, #2a0000 0%, #000 100%);
         }
 
         header { 
-            padding: 30px 15px; text-align: center; background: rgba(0,0,0,0.85); 
-            border-bottom: 2px solid var(--primary); position: sticky; top: 0; z-index: 100; backdrop-filter: blur(12px);
+            padding: 30px 15px; text-align: center; background: rgba(0,0,0,0.9); 
+            border-bottom: 2px solid var(--primary); position: sticky; top: 0; z-index: 100; backdrop-filter: blur(15px);
         }
 
-        .logo-container { display: flex; flex-direction: column; align-items: center; animation: floatingLogo 4s infinite ease-in-out; }
-        .res-text { color: var(--text-white); font-size: 32px; font-weight: 900; line-height: 0.8; letter-spacing: 3px; }
-        .town-text { color: var(--primary); font-size: 24px; font-weight: 900; line-height: 1.2; letter-spacing: 8px; text-shadow: 0 0 20px var(--primary); }
+        .logo-container { display: flex; flex-direction: column; align-items: center; animation: logoMove 4s infinite ease-in-out; }
+        .res-text { color: var(--text-white); font-size: 34px; font-weight: 900; line-height: 0.8; letter-spacing: 2px; }
+        .town-text { color: var(--primary); font-size: 26px; font-weight: 900; line-height: 1.2; letter-spacing: 10px; text-shadow: 0 0 25px var(--primary); }
 
-        @keyframes floatingLogo { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+        @keyframes logoMove { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
 
         .tabs { display: flex; justify-content: center; gap: 10px; margin-top: 20px; }
-        .tab-btn { background: #111; border: 1px solid #222; color: #777; padding: 9px 18px; border-radius: 8px; font-size: 11px; font-weight: bold; transition: 0.3s; }
-        .tab-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); box-shadow: 0 0 20px rgba(255, 0, 0, 0.4); }
+        .tab-btn { background: #151515; border: 1px solid #222; color: #666; padding: 10px 22px; border-radius: 10px; font-size: 12px; font-weight: bold; transition: 0.3s; cursor: pointer; }
+        .tab-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); box-shadow: 0 0 25px rgba(255, 0, 0, 0.5); }
 
         .content { padding: 20px; max-width: 500px; margin: auto; }
-        .page { display: none; animation: fadeIn 0.4s ease; }
+        .page { display: none; animation: slideUp 0.5s ease-out; }
         .page.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        .section-box { background: var(--card); border: 1px solid #1a1a1a; padding: 20px; border-radius: 18px; margin-bottom: 20px; }
-        h2 { font-size: 18px; margin-bottom: 15px; border-right: 4px solid var(--primary); padding-right: 12px; color: var(--primary); }
+        .section-box { background: var(--card); border: 1px solid #1f1f1f; padding: 25px; border-radius: 20px; margin-bottom: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.8); }
+        h2 { font-size: 18px; margin-bottom: 20px; border-right: 5px solid var(--primary); padding-right: 15px; color: var(--primary); }
 
-        .rule-card { background: #111; padding: 14px; border-radius: 10px; margin-bottom: 10px; font-size: 12.5px; border: 1px solid #1d1d1d; transition: 0.2s; }
-        .rule-card:active { transform: scale(0.97); border-color: var(--primary); background: #1a0000; }
+        .rule-card { background: #111; padding: 15px; border-radius: 12px; margin-bottom: 12px; font-size: 13px; border-left: 2px solid transparent; transition: 0.3s; }
+        .rule-card:active { border-left-color: var(--primary); background: #1a0000; transform: translateX(-5px); }
 
-        label { display: block; margin-bottom: 8px; font-size: 12px; color: #888; margin-right: 5px; }
-        input, textarea, select { 
-            width: 100%; padding: 14px; background: #050505; border: 1px solid #222; 
-            border-radius: 10px; color: #fff; font-size: 14px; margin-bottom: 15px; transition: 0.3s;
+        label { display: block; margin-bottom: 10px; font-size: 13px; color: #aaa; margin-right: 5px; font-weight: bold; }
+        input, textarea { 
+            width: 100%; padding: 16px; background: #050505; border: 1px solid #252525; 
+            border-radius: 12px; color: #fff; font-size: 14px; margin-bottom: 18px; transition: 0.3s;
         }
-        input:focus, textarea:focus { border-color: var(--primary); box-shadow: 0 0 10px rgba(255,0,0,0.2); }
+        input:focus, textarea:focus { border-color: var(--primary); background: #000; box-shadow: 0 0 15px rgba(255,0,0,0.1); }
 
         .submit-btn { 
-            width: 100%; padding: 18px; background: var(--primary); border: none; color: #fff; 
-            font-weight: 900; font-size: 17px; border-radius: 12px; cursor: pointer;
+            width: 100%; padding: 20px; background: var(--primary); border: none; color: #fff; 
+            font-weight: 900; font-size: 18px; border-radius: 15px; cursor: pointer;
             box-shadow: 0 6px 0 #800000; transition: 0.2s;
         }
         .submit-btn:active { transform: translateY(4px); box-shadow: 0 2px 0 #800000; }
 
-        #response-msg { text-align: center; margin-top: 15px; font-weight: bold; }
+        #response-msg { text-align: center; margin-top: 20px; font-weight: bold; font-size: 14px; }
     </style>
 </head>
 <body>
 
     <header>
         <div class="logo-container">
-            <div class="res-text">RESPECT</div>
-            <div class="town-text">TOWN</div>
+            <div class="res-text">REAL</div>
+            <div class="town-text">LIFE</div>
         </div>
         <div class="tabs">
             <button class="tab-btn active" onclick="openPage('home', this)">الرئيسية</button>
@@ -74,39 +74,37 @@
     <div class="content">
         <div id="home" class="page active">
             <div class="section-box">
-                <h2>أهلاً بك في الدولة 🏛️</h2>
-                <p style="color: #aaa; font-size: 13px; line-height: 1.8;">نظام التفعيل الآلي لدولة Respect Town. يرجى الإجابة على الأسئلة بصدق وواقعية لضمان قبولك في المجتمع.</p>
+                <h2>أهلاً بك في Real Life 🌆</h2>
+                <p style="color: #bbb; font-size: 13.5px; line-height: 1.8;">أنت على وشك الانضمام لأضخم مجتمع حياة واقعية. هنا، أفعالك تحدد مسارك. اقرأ الدستور جيداً قبل البدء برحلتك.</p>
             </div>
         </div>
 
         <div id="rules" class="page">
             <div class="section-box">
                 <h2>دستور الدولة ⚖️</h2>
-                <div class="rule-card">الاحترام المتبادل شرط أساسي للبقاء.</div>
-                <div class="rule-card">يمنع الـ RDM و الـ VDM منعاً باتاً.</div>
-                <div class="rule-card">الالتزام التام بتمثيل الشخصية (RP).</div>
-                <div class="rule-card">يمنع الخروج من الموقف (Combat Log).</div>
-                <div class="rule-card">  احترام المسئولين.</div>
+                <div class="rule-card">الاحترام المتبادل هو حجر الأساس في التعامل.</div>
+                <div class="rule-card">يمنع التخريب المتعمد أو القتل بدون دافع واقعي.</div>
+                <div class="rule-card">تمثيل الشخصية إلزامي في كافة الظروف.</div>
+                <div class="rule-card">قرارات Activate Manager نهائية ومحترمة.</div>
+                <div class="rule-card">يمنع استغلال الثغرات البرمجية لأي سبب.</div>
             </div>
         </div>
 
         <div id="apply" class="page">
             <div class="section-box">
-                <h2>طلب المواطنة</h2>
+                <h2>ملف الهوية الشخصية</h2>
                 
-                <label>معلومات الحساب</label>
-                <input type="text" id="r_user" placeholder="يوزر روبلوكس">
-                <input type="text" id="d_user" placeholder="يوزر الديسكورد">
+                <label>البيانات الأساسية</label>
+                <input type="text" id="r_user" placeholder="اسمك في روبلوكس">
+                <input type="text" id="d_user" placeholder="حساب الديسكورد">
+                <input type="number" id="u_age" placeholder="عمرك الحقيقي">
                 
-                <label>المعلومات الشخصية</label>
-                <input type="number" id="u_age" placeholder="العمر الحقيقي">
+                <label>اختبار المنطق والواقعية (أسئلة بشرية)</label>
+                <textarea id="q_1" rows="3" placeholder="لو صدمت شخصاً بالخطأ في وسط المدينة، ما هي أول ثلاث خطوات ستقوم بها؟"></textarea>
+                <textarea id="q_2" rows="3" placeholder="إذا رأيت شخصاً يرتكب مخالفة قانونية ولا يوجد شرطة، هل ستتدخل كبطل أم ستتجاهل؟ ولماذا؟"></textarea>
+                <textarea id="q_3" rows="4" placeholder="تخيل أنك أصبحت فقيراً جداً في السيرفر، كيف ستبدأ بجمع المال بطريقة قانونية وواقعية؟"></textarea>
                 
-                <label>أسئلة الرول بلاي (RP)</label>
-                <textarea id="q_vdm" rows="2" placeholder="ما هو مفهوم الـ VDM بالنسبة لك؟"></textarea>
-                <textarea id="q_metagaming" rows="2" placeholder="اشرح معنى الـ MetaGaming؟"></textarea>
-                <textarea id="q_scenario" rows="3" placeholder="إذا تعرضت للسرقة في منطقة نائية، كيف تتصرف واقعياً؟"></textarea>
-                
-                <button class="submit-btn" id="s_btn" onclick="submitData()">إرسال الطلب للدولة</button>
+                <button class="submit-btn" id="s_btn" onclick="submitData()">إرسال الطلب للإدارة</button>
                 <div id="response-msg"></div>
             </div>
         </div>
@@ -119,57 +117,61 @@
             document.getElementById(pageId).classList.add('active');
             btn.classList.add('active');
             window.scrollTo({top: 0, behavior: 'smooth'});
+            if (window.navigator.vibrate) window.navigator.vibrate(15);
         }
 
         async function submitData() {
-            const webhook = "https://discord.com/api/webhooks/1500146994642026516/ImqkpAcaBC92U8HJY1ayLYYtPRb98q_YpXpH-0q-XVC0Gyb2GNAlsWZsLrZus8_i7Mux";
-            const data = {
+            const webhook = "https://discord.com/api/webhooks/1500969638266146916/2YGfQWJplswUJwoDKfeh5NyjG_O7uAicND581OmafskBln5yH4UGuPkC3PCXBgJl4GQw";
+            
+            const fields = {
                 user: document.getElementById('r_user').value,
                 discord: document.getElementById('d_user').value,
                 age: document.getElementById('u_age').value,
-                vdm: document.getElementById('q_vdm').value,
-                meta: document.getElementById('q_metagaming').value,
-                scen: document.getElementById('q_scenario').value
+                q1: document.getElementById('q_1').value,
+                q2: document.getElementById('q_2').value,
+                q3: document.getElementById('q_3').value
             };
 
             const msg = document.getElementById('response-msg');
-            if(!data.user || !data.age || !data.vdm) {
-                msg.style.color = "yellow"; msg.innerText = "⚠️ أكمل جميع الأسئلة أولاً"; return;
+            if(!fields.user || !fields.age || !fields.q1 || !fields.q2 || !fields.q3) {
+                msg.style.color = "#ffaa00"; msg.innerText = "⚠️ نرجو منك الإجابة على كافة التساؤلات لتقييم طلبك"; return;
             }
 
-            document.getElementById('s_btn').disabled = true;
-            document.getElementById('s_btn').innerText = "جاري إرسال ملفك...";
+            const btn = document.getElementById('s_btn');
+            btn.disabled = true;
+            btn.innerText = "جاري رفع ملفك للدولة...";
 
-            const embed = {
-                username: "بوابة المواطنة | Respect Town",
+            const payload = {
+                username: "بوابة Real Life",
                 embeds: [{
-                    title: "📄 طلب تفعيل جديد",
-                    description: "يجب مراجعة هذا الطلب من قبل **Activate Manager**",
+                    title: "📥 طلب انضمام جديد",
+                    description: "يجب مراجعته من قبل **Activate Manager** بعناية",
                     color: 16711680,
                     fields: [
-                        { name: "👤 اللاعب", value: data.user, inline: true },
-                        { name: "🆔 ديسكورد", value: data.discord, inline: true },
-                        { name: "🎂 العمر", value: data.age, inline: true },
-                        { name: "🚗 مفهوم VDM", value: data.vdm },
-                        { name: "🧠 مفهوم MetaGaming", value: data.meta },
-                        { name: "🎬 تصرف واقعي", value: data.scen },
-                        { name: "🛠️ الإجراء المطلوب", value: "استخدم الأوامر لإعطاء رتبة `Activated` أو `Inactive`" }
+                        { name: "👤 اسم المواطن", value: fields.user, inline: true },
+                        { name: "🆔 الديسكورد", value: fields.discord, inline: true },
+                        { name: "🎂 العمر", value: fields.age, inline: true },
+                        { name: "🚗 التعامل مع الحوادث", value: fields.q1 },
+                        { name: "⚖️ الموقف الأخلاقي", value: fields.q2 },
+                        { name: "💰 خطة العمل", value: fields.q3 },
+                        { name: "🛠️ رتب التفعيل", value: "المسموح لهم: `Activate Manager`\nالرتب: `Activated` / `Inactive`" }
                     ],
-                    footer: { text: "القرار بيد الإدارة العليا" },
+                    footer: { text: "نظام التفعيل التلقائي - Real Life" },
                     timestamp: new Date()
                 }]
             };
 
             try {
-                await fetch(webhook, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(embed) });
-                msg.style.color = "#00ff00"; msg.innerText = "✅ تم الإرسال! انتظر قرار الإدارة.";
-                document.getElementById('s_btn').innerText = "تم الإرسال بنجاح";
+                const res = await fetch(webhook, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(payload) });
+                if(res.ok) {
+                    msg.style.color = "#00ff00"; msg.innerText = "✅ تم استلام طلبك، ستتم مراجعته قريباً.";
+                    btn.innerText = "تم الإرسال";
+                } else { throw new Error(); }
             } catch {
-                msg.style.color = "red"; msg.innerText = "❌ فشل الإرسال";
-                document.getElementById('s_btn').disabled = false;
+                msg.style.color = "red"; msg.innerText = "❌ حدث خطأ في الشبكة، حاول مرة أخرى";
+                btn.disabled = false; btn.innerText = "إعادة المحاولة";
             }
         }
     </script>
 </body>
 </html>
-                
